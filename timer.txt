@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+
+    <h2>Countdown Timer</h2>
+
+    <label for="targetDate">Enter target date and time (yyyy-mm-dd hh:mm:ss):</label>
+    <input type="text" id="targetDate" placeholder="yyyy-mm-dd hh:mm:ss">
+    <button onclick="startCountdown()">Start Countdown</button>
+
+    <h3>Time Remaining:</h3>
+    <div id="countdownDisplay">0</div>
+
+    <script>
+        let countdown; // Variable to store the countdown interval
+
+        function startCountdown() {
+            // Clear any existing countdowns
+            clearInterval(countdown);
+
+            // Get the target date and time from the input
+            let targetDate = document.getElementById("targetDate").value;
+            let targetDateObj = new Date(targetDate);
+
+            // Check if the input is a valid date
+            if (isNaN(targetDateObj.getTime())) {
+                document.getElementById("countdownDisplay").innerText = "Please enter a valid date and time.";
+                return;
+            }
+
+            // Start the countdown
+            countdown = setInterval(() => {
+                let now = new Date();
+                let timeRemaining = targetDateObj - now; // Time remaining in milliseconds
+
+                if (timeRemaining <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById("countdownDisplay").innerText = "Time's up!";
+                    return;
+                }
+
+                // Calculate days, hours, minutes, and seconds
+                let days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Display the time in "days:hours:minutes:seconds" format
+                document.getElementById("countdownDisplay").innerText =
+                    days + "d:" +
+                    (hours < 10 ? "0" + hours : hours) + "h:" +
+                    (minutes < 10 ? "0" + minutes : minutes) + "m:" +
+                    (seconds < 10 ? "0" + seconds : seconds) + "s";
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Event Example</title>
+    <style>
+        /* Default background color */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <p>Enter your name: <input type="text" onfocus="myFunction(this)"></p>
+    <p>When the input field gets focus, a function is triggered that changes the background color.</p>
+
+    <script>
+        function myFunction(element) {
+            element.style.backgroundColor = "pink";
+        }
+    </script>
+</body>
+</html>

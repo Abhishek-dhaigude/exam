@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Operations</title>
+</head>
+<body>
+
+    <h2>Set Operations</h2>
+
+    <label for="setA">Enter elements for Set A (comma separated):</label>
+    <input type="text" id="setA" placeholder="e.g. 1,2,3,4">
+    <br><br>
+
+    <label for="setB">Enter elements for Set B (comma separated):</label>
+    <input type="text" id="setB" placeholder="e.g. 3,4,5,6">
+    <br><br>
+
+    <button onclick="performUnion()">Union of Sets</button>
+    <button onclick="performIntersection()">Intersection of Sets</button>
+    <button onclick="performDifference()">Difference of A - B</button>
+    <button onclick="performSetDifferenceB()">Difference of B - A</button>
+
+    <h3>Results:</h3>
+    <div id="result"></div>
+
+    <script>
+        // Function to convert input string to a set
+        function stringToSet(input) {
+            // Convert input to an array of numbers, remove duplicates using Set, and return as a Set
+            return new Set(input.split(',').map(Number).filter(e => !isNaN(e)));
+        }
+
+        // Function to append result to the result div
+        function appendResult(text) {
+            let resultDiv = document.getElementById("result");
+            let newResult = document.createElement("p");
+            newResult.innerText = text;
+            resultDiv.appendChild(newResult);
+        }
+
+        // Union of two sets
+        function performUnion() {
+            let setA = stringToSet(document.getElementById('setA').value);
+            let setB = stringToSet(document.getElementById('setB').value);
+            let unionSet = new Set([...setA, ...setB]); // Spread both sets and merge them
+            appendResult(`Union (A ∪ B): [${[...unionSet].join(', ')}]`);
+        }
+
+        // Intersection of two sets
+        function performIntersection() {
+            let setA = stringToSet(document.getElementById('setA').value);
+            let setB = stringToSet(document.getElementById('setB').value);
+            let intersectionSet = new Set([...setA].filter(x => setB.has(x))); // Get common elements
+            appendResult(`Intersection (A ∩ B): [${[...intersectionSet].join(', ')}]`);
+        }
+
+        // Difference of A - B
+        function performDifference() {
+            let setA = stringToSet(document.getElementById('setA').value);
+            let setB = stringToSet(document.getElementById('setB').value);
+            let differenceSet = new Set([...setA].filter(x => !setB.has(x))); // Elements in A but not in B
+            appendResult(`Difference (A - B): [${[...differenceSet].join(', ')}]`);
+        }
+
+        // Difference of B - A
+        function performSetDifferenceB() {
+            let setA = stringToSet(document.getElementById('setA').value);
+            let setB = stringToSet(document.getElementById('setB').value);
+            let differenceSetB = new Set([...setB].filter(x => !setA.has(x))); // Elements in B but not in A
+            appendResult(`Difference (B - A): [${[...differenceSetB].join(', ')}]`);
+        }
+    </script>
+
+</body>
+</html>

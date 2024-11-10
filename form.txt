@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="radio"] {
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+        .success-message {
+            display: none;
+            color: green;
+            font-size: 1.1em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="studentForm" onsubmit="return validateForm()">
+        <h2>Student Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error" id="nameError">Please enter a valid name (alphabets only).</span>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        <span class="error" id="addressError">Please enter an address.</span>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city">
+        <span class="error" id="cityError">Please enter a city.</span>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state">
+        <span class="error" id="stateError">Please enter a state.</span>
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <span class="error" id="genderError">Please select your gender.</span>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile">
+        <span class="error" id="mobileError">Please enter a valid 10-digit mobile number.</span>
+
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError">Please enter a valid email address.</span>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+        <h2>Congratulations!</h2>
+        <p>Welcome! Your information was submitted successfully.</p>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Define regex patterns for validation
+            const namePattern = /^[a-zA-Z\s]+$/;
+            const mobilePattern = /^\d{10}$/;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+           
+            // Get form values
+            const name = document.getElementById("name").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const state = document.getElementById("state").value.trim();
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const mobile = document.getElementById("mobile").value.trim();
+            const email = document.getElementById("email").value.trim();
+           
+            // Error flag
+            let isValid = true;
+
+            // Name validation
+            if (!namePattern.test(name)) {
+                document.getElementById("nameError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("nameError").style.display = "none";
+            }
+
+            // Address validation
+            if (!address) {
+                document.getElementById("addressError").style.display = "block";
+                isValid = false;
+            } else {
+                document

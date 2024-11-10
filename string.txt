@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+</head>
+<body>
+
+    <h2>String Operations</h2>
+
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString" placeholder="Enter your string here">
+    <br><br>
+
+    <button onclick="reverseString()">Reverse String</button>
+    <button onclick="replaceCharacters()">Replace Characters</button>
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+
+    <h3>Result:</h3>
+    <div id="result"></div>
+
+    <script>
+        // Function to reverse the string
+        function reverseString() {
+            let str = document.getElementById("inputString").value;
+            let reversedStr = str.split('').reverse().join('');
+            document.getElementById("result").innerText = "Reversed String: " + reversedStr;
+        }
+
+        // Function to replace characters in the string
+        function replaceCharacters() {
+            let str = document.getElementById("inputString").value;
+            let searchChar = prompt("Enter the character to replace:");
+            let replaceChar = prompt("Enter the replacement character:");
+            if (searchChar === null || replaceChar === null) return;
+            let replacedStr = str.split(searchChar).join(replaceChar);
+            document.getElementById("result").innerText = "String after replacement: " + replacedStr;
+        }
+
+        // Function to check if the string is a palindrome
+        function checkPalindrome() {
+            let str = document.getElementById("inputString").value;
+            let cleanedStr = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();  // Remove non-alphanumeric chars & lowercase
+            let reversedStr = cleanedStr.split('').reverse().join('');
+            if (cleanedStr === reversedStr) {
+                document.getElementById("result").innerText = "The string is a palindrome.";
+            } else {
+                document.getElementById("result").innerText = "The string is not a palindrome.";
+            }
+        }
+    </script>
+
+</body>
+</html>

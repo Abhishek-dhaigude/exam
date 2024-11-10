@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+</head>
+<body>
+
+    <h2>Array Operations</h2>
+
+    <h3>Original Array: [1, 2, 3, 6, 7, 5]</h3>
+   
+    <label for="arrayElement">Enter element to add:</label>
+    <input type="text" id="arrayElement" placeholder="Enter an element">
+    <button onclick="addElement()">Add Element</button>
+    <br><br>
+
+    <label for="removeElement">Enter element to remove:</label>
+    <input type="text" id="removeElement" placeholder="Enter element to remove">
+    <button onclick="removeSpecificElement()">Remove Specific Element</button>
+    <br><br>
+
+    <label for="checkElement">Enter element to check:</label>
+    <input type="text" id="checkElement" placeholder="Enter element to check">
+    <button onclick="checkIfContains()">Check if Contains Element</button>
+    <br><br>
+
+    <button onclick="removeLastElement()">Remove Last Element</button>
+    <button onclick="removeFirstElement()">Remove First Element</button>
+    <button onclick="emptyArray()">Empty Array</button>
+    <button onclick="displayArray()">Display Array</button>
+    <button onclick="findLength()">Find Array Length</button>
+
+    <h3>Array Operations Result:</h3>
+    <div id="result"></div>
+
+    <script>
+        // Initial array with given values
+        let array = [1, 2, 3, 6, 7, 5];
+
+        // Function to add element to the array
+        function addElement() {
+            let element = document.getElementById("arrayElement").value;
+            if (element !== "") {
+                array.push(element); // Adds element to the end of the array
+                document.getElementById("result").innerText = `Element "${element}" added.\nCurrent Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = "Please enter an element.";
+            }
+        }
+
+        // Function to remove a specific element from the array
+        function removeSpecificElement() {
+            let element = document.getElementById("removeElement").value;
+            let index = array.indexOf(parseInt(element));
+            if (index !== -1) {
+                array.splice(index, 1); // Removes the specific element
+                document.getElementById("result").innerText = `Element "${element}" removed.\nCurrent Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = `Element "${element}" not found in the array.\nCurrent Array: [${array.join(", ")}]`;
+            }
+        }
+
+        // Function to check if the array contains a specific element
+        function checkIfContains() {
+            let element = document.getElementById("checkElement").value;
+            if (array.includes(parseInt(element))) {
+                document.getElementById("result").innerText = `Array contains "${element}".\nCurrent Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = `Array does not contain "${element}".\nCurrent Array: [${array.join(", ")}]`;
+            }
+        }
+
+        // Function to remove the last element from the array
+        function removeLastElement() {
+            if (array.length > 0) {
+                let removedElement = array.pop(); // Removes the last element
+                document.getElementById("result").innerText = `"${removedElement}" removed from the end.\nCurrent Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = "Array is empty!";
+            }
+        }
+
+        // Function to remove the first element from the array
+        function removeFirstElement() {
+            if (array.length > 0) {
+                let removedElement = array.shift(); // Removes the first element
+                document.getElementById("result").innerText = `"${removedElement}" removed from the beginning.\nCurrent Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = "Array is empty!";
+            }
+        }
+
+        // Function to empty the array
+        function emptyArray() {
+            array = []; // Resets the array to an empty array
+            document.getElementById("result").innerText = "Array is now empty.\nCurrent Array: []";
+        }
+
+        // Function to display the current array
+        function displayArray() {
+            if (array.length > 0) {
+                document.getElementById("result").innerText = `Current Array: [${array.join(", ")}]`;
+            } else {
+                document.getElementById("result").innerText = "Array is empty!";
+            }
+        }
+
+        // Function to find the length of the array
+        function findLength() {
+            document.getElementById("result").innerText = `Array Length: ${array.length}\nCurrent Array: [${array.join(", ")}]`;
+        }
+    </script>
+
+</body>
+</html>
